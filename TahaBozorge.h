@@ -1,12 +1,12 @@
-#ifndef TAHAKOOCHIKE_H
-#define TAHAKOOCHIKE_H
+#ifndef TAHABOZORGE_H
+#define TAHABOZORGE_H
 
 #include "Hero.h"
 
-class TahaKoochike : public Hero
+class TahaBozorge : public Hero
 {
 public:
-    TahaKoochike();
+    TahaBozorge();
 
     void skill1(Team& myTeam, Team& enemyTeam) override;
     void skill2(Team& myTeam, Team& enemyTeam) override;

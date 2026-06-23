@@ -1,6 +1,6 @@
 #ifndef HERO_H
 #define HERO_H
-
+#include <iostream>
 #include <string>
 using namespace std;
 

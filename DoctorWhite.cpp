@@ -16,6 +16,13 @@ string DoctorWhite::getRole() const
 // اسپرین دکتر که ۴۰ واحد سلامتی قهرمان رندوم خودمون افزایش و مال دشمن قهرمان انتخاب و ۴۰ تا ازش کم
 void DoctorWhite::skill1(Team& myTeam, Team& enemyTeam)
 {
+    if (myTeam.getEnergy() < 3)
+    {
+        cout << "Not enough energy!\n";
+        return;
+    }
+
+    myTeam.decreaseEnergy(3);
     Hero* randomAlly = myTeam.getRandomAliveHero();
 
     if (randomAlly != nullptr)
@@ -40,6 +47,13 @@ void DoctorWhite::skill1(Team& myTeam, Team& enemyTeam)
 // قدرت دوم قدرت دوپینگ
 void DoctorWhite::skill2(Team& myTeam, Team& enemyTeam)
 {
+    if (myTeam.getEnergy() < 4)
+    {
+        cout << "Not enough energy!\n";
+        return;
+    }
+
+    myTeam.decreaseEnergy(4);
     Hero* ally = myTeam.chooseAliveHero();
     //قابلیتی که روی اون قهرمان اعمال میشه رو ننوشتم
     cout << "Doctor White used Doping on " << ally->getName() << ".\n";
@@ -49,6 +63,13 @@ void DoctorWhite::skill2(Team& myTeam, Team& enemyTeam)
 //قدرت ویژه
 void DoctorWhite::specialSkill(Team& myTeam, Team& enemyTeam)
 {
+    if (myTeam.getEnergy() < 4)
+    {
+        cout << "Not enough energy!\n";
+        return;
+    }
+
+    myTeam.decreaseEnergy(4);
     //تمام اثرات منفی رو پاک نکردم هنوز
     if (!myTeam.canUseSpecial(4))
     {

@@ -15,6 +15,13 @@ string TahaKoochike::getRole() const
 
 void TahaKoochike::skill1(Team& myTeam, Team& enemyTeam)
 {
+    if (myTeam.getEnergy() < 2)
+    {
+        cout << "Not enough energy!\n";
+        return;
+    }
+
+    myTeam.decreaseEnergy(2);
     Hero* weakestAlly = myTeam.getWeakestHero();
 
     if (weakestAlly != nullptr)
@@ -37,6 +44,13 @@ void TahaKoochike::skill1(Team& myTeam, Team& enemyTeam)
 
 void TahaKoochike::skill2(Team& myTeam, Team& enemyTeam)
 {
+    if (myTeam.getEnergy() < 4)
+    {
+        cout << "Not enough energy!\n";
+        return;
+    }
+
+    myTeam.decreaseEnergy(4);
     cout << "\nChoose an ally for Blood Serum:\n";
 
     Hero* ally = myTeam.chooseAliveHero();
@@ -48,6 +62,13 @@ void TahaKoochike::skill2(Team& myTeam, Team& enemyTeam)
 
 void TahaKoochike::specialSkill(Team& myTeam, Team& enemyTeam)
 {
+    if (myTeam.getEnergy() < 4)
+    {
+        cout << "Not enough energy!\n";
+        return;
+    }
+
+    myTeam.decreaseEnergy(4);
     if (!myTeam.canUseSpecial(3))
     {
         cout << "Taha Koochike's special skill is not ready.\n";
