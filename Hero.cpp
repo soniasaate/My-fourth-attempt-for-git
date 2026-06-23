@@ -33,7 +33,7 @@ void Hero::heal(int amount)
     {
         hp = maxHp;
     }
-    cout<< "Hero healing done with "<<amount<<" hp" <<endl;
+    //cout<< "Hero healing done with "<<amount<<" hp" <<endl;
     
 }
 

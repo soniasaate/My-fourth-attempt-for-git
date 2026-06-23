@@ -51,12 +51,15 @@ int Team::aliveCount() const {
     return count;
 }
 
-Hero* Team::getWeakestHero() {
+Hero* Team::getWeakestHero() 
+{
     Hero* weakest = nullptr;
-    int minHp = INT_MAX;
+    int minHp = INT_MAX; //برابر بزرگتریم عدد ممکن گذاشتم که حتما قهرمان اولی که بررسی میشه رو در نظر بگیره
     
-    for (Hero* hero : heroes) {
-        if (hero->isAlive() && hero->getHP() < minHp) {
+    for (Hero* hero : heroes) 
+    {
+        if (hero->isAlive() && hero->getHP() < minHp) 
+        {
             minHp = hero->getHP();
             weakest = hero;
         }

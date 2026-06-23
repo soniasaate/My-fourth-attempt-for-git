@@ -22,8 +22,8 @@ void DoctorWhite::skill1(Team& myTeam, Team& enemyTeam)
     {
         randomAlly->heal(40);
 
-       // cout << randomAlly->getName() << " was healed by 40 HP.\n";
-       //چاپ رو توی هیل اضافه کردم فعلا
+       cout << randomAlly->getName() << " was healed by 40 HP.\n";
+
     }
 
     cout << "\nChoose an enemy to damage:\n";
