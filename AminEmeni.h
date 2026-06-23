@@ -15,7 +15,7 @@ public:
     string getRole() const override;
 
 private:
-    int killStreak = 1;
+    int killStreak ;
     bool dopingActive = false;
 };
 #endif

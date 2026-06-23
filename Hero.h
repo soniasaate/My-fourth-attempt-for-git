@@ -13,6 +13,18 @@ protected:
     int hp;
     int maxHp;
 
+    int shieldHP;
+    int shieldRoundsLeft;
+
+    int dopingRoundsLeft;
+
+    int bloodSerumRoundsLeft;
+
+    bool hidden;
+    int hiddenRoundsLeft;
+
+    bool pendingDeath;
+
     //int specialCooldown;
     //int turnsSinceSpecial;
 
@@ -46,6 +58,24 @@ public:
     //int getSpecialCooldown() const;
     void revive(int amount);
 
+    void addShield(int amount, int rounds);
+
+    void decreaseShieldRound();
+
+    bool hasShield() const;
+
+    int getShieldHP() const;
+    void activateDoping(int rounds);
+    bool hasDoping() const;
+
+    void activateBloodSerum(int rounds);
+
+    void activateHidden(int rounds);
+
+    void addPendingDeath();
+    void clearNegativeEffects();
+
+    void processEndOfRoundEffects();
     virtual ~Hero();
 
 };

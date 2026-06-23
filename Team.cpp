@@ -188,6 +188,26 @@ bool Team::canUseSpecial(int neededRounds) const
     return specialTurnsPassed >= neededRounds;
 }
 
+Hero* Team::getRandomAliveHeroExcept(Hero* excludedHero)
+{
+    vector<Hero*> availableHeroes;
+
+    for (Hero* hero : heroes)
+    {
+        if (hero->isAlive() && hero != excludedHero)
+        {
+            availableHeroes.push_back(hero);
+        }
+    }
+
+    if (availableHeroes.empty())
+        return nullptr;
+
+    int randomIndex = rand() % availableHeroes.size();
+
+    return availableHeroes[randomIndex];
+}
+
 
 Team::~Team()
 {

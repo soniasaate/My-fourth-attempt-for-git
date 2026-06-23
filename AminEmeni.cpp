@@ -1,10 +1,14 @@
 #include "AminEmeni.h"
 #include "Team.h"
 
-AminEmeni::AminEmeni(): Hero("Amin Emeni", 500)
+AminEmeni::AminEmeni(): Hero("Amin Emeni", 500),killStreak(1)
 {
 }
 
+string AminEmeni::getRole() const
+{
+    return "Attacker";
+}
 void AminEmeni::skill1(Team& myTeam, Team& enemyTeam)
 {
     if (myTeam.getEnergy() < 3)
@@ -13,14 +17,17 @@ void AminEmeni::skill1(Team& myTeam, Team& enemyTeam)
         return;
     }
 
-    myTeam.decreaseEnergy(3);
+    
     Hero* target = enemyTeam.getRandomAliveHero();
     if (!target) return;
-
+    myTeam.decreaseEnergy(3);
     int damage = 55 * killStreak;
+    if (hasDoping())
+    {
+        damage = damage * 120 / 100;
+    }
 
     target->takeDamage(damage);
-//ناقص و اشتباه نوشتم
     if (!target->isAlive())
         killStreak *= 2;
 
@@ -38,44 +45,48 @@ void AminEmeni::skill2(Team& myTeam, Team& enemyTeam)
     }
 
     myTeam.decreaseEnergy(3);
-    Hero* ally = myTeam.getRandomAliveHero();
-    while (ally == this) 
+    Hero* ally = myTeam.getRandomAliveHeroExcept(this);
+    if (ally == nullptr)
     {
-        ally = myTeam.getRandomAliveHero(); 
+        cout << "No other alive ally is available.\n";
+        return;
     }
-
-    if (!ally) return;
 
     ally->takeDamage(25);
     this->heal(75);
 
+    cout << ally->getName() << " took 25 damage.\n";    
     cout << "Amin used self-hit skill\n";
 }
 
 void AminEmeni::specialSkill(Team& myTeam, Team& enemyTeam)
 {
-    if (myTeam.getEnergy() < 4)
-    {
-        cout << "Not enough energy!\n";
-        return;
-    }
-    myTeam.decreaseEnergy(4);
     if (!myTeam.canUseSpecial(3))
     {
         cout << "Not ready\n";
         return;
     }
+    if (myTeam.getEnergy() < 4)
+    {
+        cout << "Not enough energy!\n";
+        return;
+    }
+
+
 
     Hero* target = enemyTeam.getRandomAliveHero();
 
     if (!target) return;
+    myTeam.decreaseEnergy(4);
 
     cout<<"One.. two... three.. boom... who's left? It doesn't matter."<<endl;
 
     int damage = 250;
+    if (hasDoping())
+    {
+        damage = damage * 120 / 100;
+    }
 
-    /*if (dopingActive)
-        damage = damage * 1.2;*/
     target->takeDamage(damage);
 
     vector<Hero*>& heroes = myTeam.getHeroes();
@@ -88,3 +99,5 @@ void AminEmeni::specialSkill(Team& myTeam, Team& enemyTeam)
 
     myTeam.resetSpecialTurns();
 }
+
+

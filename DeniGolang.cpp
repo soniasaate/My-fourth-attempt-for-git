@@ -2,6 +2,8 @@
 #include "Team.h"
 #include <iostream>
 
+//قابلیت اولش کامل نیست فقط
+
 using namespace std;
 
 DeniGolang::DeniGolang(): Hero("Deni Golang", 600)
@@ -48,10 +50,15 @@ void DeniGolang::skill2(Team& myTeam, Team& enemyTeam)
 
     myTeam.decreaseEnergy(4);
     Hero* target = enemyTeam.chooseAliveHero();
-    Hero* maxhp = enemyTeam.getStrongestHero();
+    int damage=50;
+    if (hasDoping())
+    {
+        damage = damage * 120 / 100;
+    }
 
-    target->takeDamage(50);
-    maxhp->takeDamage(50);
+    target->takeDamage(damage);
+    Hero* maxhp = enemyTeam.getStrongestHero();
+    maxhp->takeDamage(damage);
 
     cout << "Elephant killer  skill used\n";
 }
@@ -59,28 +66,31 @@ void DeniGolang::skill2(Team& myTeam, Team& enemyTeam)
 
 void DeniGolang::specialSkill(Team& myTeam, Team& enemyTeam)
 {
-        if (myTeam.getEnergy() < 4)
-    {
-        cout << "Not enough energy!\n";
-        return;
-    }
-    myTeam.decreaseEnergy(4);
-
     if (!myTeam.canUseSpecial(4))
     {
         cout << "Special not ready\n";
         return;
     }
 
-    shieldTarget = myTeam.getWeakestHero();
+    if (myTeam.getEnergy() < 4)
+    {
+        cout << "Not enough energy!\n";
+        return;
+    }
+    
+
+    Hero* shieldTarget = myTeam.getWeakestHero();
+    if (shieldTarget == nullptr)
+        return;
+
+    myTeam.decreaseEnergy(4);
+
+    shieldTarget->addShield(250, 2);
+
+
     cout <<"No one crosses this line!"<<endl;
 
-    if (!shieldTarget) return;
-    //باید سپر رو توی کلاس قهرمان اضافه کنم
-    shieldHP = 250;
-    shieldTurns = 2;
-
-    cout << "Shield applied to " << shieldTarget->getName() << endl;
+    cout << "Shield applied to " << shieldTarget->getName() <<"for 2 round"<< endl;
 
     myTeam.resetSpecialTurns();
 }

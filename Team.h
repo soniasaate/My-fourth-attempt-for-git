@@ -38,6 +38,7 @@ public:
     Hero* getRandomAliveHero();
     Hero* chooseAliveHero();
     Hero* chooseDeadHeroExcept(Hero* excludedHero);
+    Hero* getRandomAliveHeroExcept(Hero* excludedHero);
 
     void increaseSpecialTurns();
 

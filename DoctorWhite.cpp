@@ -53,9 +53,15 @@ void DoctorWhite::skill2(Team& myTeam, Team& enemyTeam)
         return;
     }
 
+   Hero* ally = myTeam.chooseAliveHero();
+
+    if (ally == nullptr)
+        return;
+
     myTeam.decreaseEnergy(4);
-    Hero* ally = myTeam.chooseAliveHero();
-    //قابلیتی که روی اون قهرمان اعمال میشه رو ننوشتم
+
+    ally->activateDoping(2);
+
     cout << "Doctor White used Doping on " << ally->getName() << ".\n";
 
 }
@@ -63,19 +69,20 @@ void DoctorWhite::skill2(Team& myTeam, Team& enemyTeam)
 //قدرت ویژه
 void DoctorWhite::specialSkill(Team& myTeam, Team& enemyTeam)
 {
+    if (!myTeam.canUseSpecial(4))
+    {
+        cout << "Doctor White's special skill is not ready.\n";
+        return;
+    }
     if (myTeam.getEnergy() < 4)
     {
         cout << "Not enough energy!\n";
         return;
     }
 
-    myTeam.decreaseEnergy(4);
+
     //تمام اثرات منفی رو پاک نکردم هنوز
-    if (!myTeam.canUseSpecial(4))
-    {
-        cout << "Doctor White's special skill is not ready.\n";
-        return;
-    }
+
 
     Hero* deadHero = myTeam.chooseDeadHeroExcept(this);
 
@@ -83,10 +90,11 @@ void DoctorWhite::specialSkill(Team& myTeam, Team& enemyTeam)
     {
         return;
     }
-
+    myTeam.decreaseEnergy(4);
     cout << "\"Bring him to the table... he may survive if lucky.\"\n";
 
     deadHero->revive(200);
+    deadHero->clearNegativeEffects();
 
     cout << deadHero->getName()<< " was revived with 200 HP.\n";
 

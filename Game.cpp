@@ -72,10 +72,36 @@ void Game::playGame()
             playerTurn(player1, player2, true);
         }
 
+        for (Hero* hero : player1.getHeroes())
+        {
+           hero->processEndOfRoundEffects();
+        }
+
+        for (Hero* hero : player2.getHeroes())
+        {
+            hero->processEndOfRoundEffects();
+        }
+
 
         //به شمارنده ی قدرت ویژه یکی اضافه میکنم
         player1.increaseSpecialTurns();
         player2.increaseSpecialTurns();
+
+       /* for (Hero* hero : player1.getHeroes())
+        {
+            if (hero->hasShield())
+            {
+               hero->decreaseShieldRound();
+            }
+        }
+
+        for (Hero* hero : player2.getHeroes())
+        {
+            if (hero->hasShield())
+            {
+                hero->decreaseShieldRound();
+            }
+        }*/
     
 
         checkWinner();

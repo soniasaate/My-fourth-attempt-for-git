@@ -35,7 +35,12 @@ void TahaKoochike::skill1(Team& myTeam, Team& enemyTeam)
 
     Hero* targetEnemy = enemyTeam.chooseAliveHero();
 
-    targetEnemy->takeDamage(30);
+    int damage =30;
+    if (hasDoping())
+    {
+        damage = damage * 120 / 100;
+    }
+    targetEnemy->takeDamage(damage);
 
     cout << targetEnemy->getName() << " took 30 damage.\n";
 
@@ -50,11 +55,17 @@ void TahaKoochike::skill2(Team& myTeam, Team& enemyTeam)
         return;
     }
 
-    myTeam.decreaseEnergy(4);
+
     cout << "\nChoose an ally for Blood Serum:\n";
 
     Hero* ally = myTeam.chooseAliveHero();
-    //قابلیتش رو بعد باید بنویسم
+    if (ally == nullptr)
+        return;
+
+    myTeam.decreaseEnergy(4);
+
+    ally->activateBloodSerum(2);
+
 
     cout << ally->getName()<< " received Blood Serum.\n";
 
