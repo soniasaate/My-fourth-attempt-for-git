@@ -72,6 +72,7 @@ void Game::playGame()
             playerTurn(player1, player2, true);
         }
 
+
         // به همه ی قهرمان های هردو تیم به قدرت ویژه اش یک راند اضافه میکنیم
         for (Hero* hero : player1.getHeroes())
             if (hero->isAlive())

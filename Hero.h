@@ -44,8 +44,10 @@ public:
 
     int getTurnsSinceSpecial() const;
     int getSpecialCooldown() const;
+    void revive(int amount);
 
     virtual ~Hero();
+
 };
 
 #endif

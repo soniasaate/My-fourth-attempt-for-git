@@ -1,5 +1,6 @@
 #include "Hero.h"
 #include <algorithm>
+#include <iostream>
 
 Hero::Hero(const string& heroName, int heroMaxHp, int cooldown): name(heroName),  hp(heroMaxHp),  maxHp(heroMaxHp),  specialCooldown(cooldown),  turnsSinceSpecial(0),  alive(true)
 {
@@ -27,7 +28,11 @@ void Hero::heal(int amount)
     hp += amount;
 
     if (hp > maxHp)
+    {
         hp = maxHp;
+    }
+    cout<< "Hero healing done with "<<amount<<" hp" <<endl;
+    
 }
 
 bool Hero::isAlive() const
@@ -74,6 +79,18 @@ int Hero::getTurnsSinceSpecial() const
 int Hero::getSpecialCooldown() const
 {
     return specialCooldown;
+}
+
+void Hero::revive(int amount)
+{
+    if (alive)
+        return;
+
+    alive = true;
+    hp = amount;
+
+    if (hp > maxHp)
+        hp = maxHp;
 }
 
 Hero::~Hero()

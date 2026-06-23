@@ -1,7 +1,9 @@
 
 #include "Team.h"
 #include <algorithm>
-
+#include <climits> 
+#include <cstdlib>
+#include <iostream>
 Team::Team() : energy(0) 
 {
 }
@@ -78,6 +80,37 @@ Hero* Team::getRandomAliveHero() {
     return aliveHeroes[randomIndex];
 }
 
+Hero* Team::chooseAliveHero()
+{
+    int choice;
+
+    while (true)
+    {
+        cout << "\nChoose a target:\n";
+
+        for (int i = 0; i < heroes.size(); i++)
+        {
+            cout << i + 1 << ". "
+                 << heroes[i]->getName()
+                 << " | HP: " << heroes[i]->getHP()
+                 << " | " << (heroes[i]->isAlive() ? "Alive" : "Dead")
+                 << '\n';
+        }
+
+        cout << "Choice: ";
+        cin >> choice;
+
+        if (choice >= 1 &&
+            choice <= heroes.size() &&
+            heroes[choice - 1]->isAlive())
+        {
+            return heroes[choice - 1];
+        }
+
+        cout << "Invalid choice. Choose an alive hero.\n";
+    }
+}
+
 Hero* Team::getStrongestHero() {
     Hero* strongest = nullptr;
     int maxHp = 0;
@@ -89,6 +122,47 @@ Hero* Team::getStrongestHero() {
         }
     }
     return strongest;
+}
+
+Hero* Team::chooseDeadHeroExcept(Hero* excludedHero)
+{
+    vector<Hero*> deadHeroes;
+
+    for (Hero* hero : heroes)
+    {
+        if (!hero->isAlive() && hero != excludedHero)
+        {
+            deadHeroes.push_back(hero);
+        }
+    }
+
+    if (deadHeroes.empty())
+    {
+        cout << "There is no dead hero available \n";
+        return nullptr;
+    }
+
+    cout << "\nChoose a dead hero :\n";
+
+    for (int i = 0; i < deadHeroes.size(); i++)
+    {
+        cout << i + 1 << ". "<< deadHeroes[i]->getName() << " [" << deadHeroes[i]->getRole() << "]" << " | Dead\n";
+    }
+
+    int choice;
+
+    while (true)
+    {
+        cout << "Choice: ";
+        cin >> choice;
+
+        if (choice >= 1 && choice <= deadHeroes.size())
+        {
+            return deadHeroes[choice - 1];
+        }
+
+        cout << "Invalid choice. Try again.\n";
+    }
 }
 
 

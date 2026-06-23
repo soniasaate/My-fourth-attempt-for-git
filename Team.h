@@ -35,6 +35,8 @@ public:
 
 
     Hero* getRandomAliveHero();
+    Hero* chooseAliveHero();
+    Hero* chooseDeadHeroExcept(Hero* excludedHero);
 
     
     ~Team();
