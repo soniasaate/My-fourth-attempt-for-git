@@ -1,21 +1,43 @@
-#ifndef team_H
-#define team_H
-#include <iostream>
+#ifndef TEAM_H
+#define TEAM_H
+
+#include <vector>
+#include "Hero.h"
+
 using namespace std;
 
-
-class team
+class Team
 {
-    public:
-    team();
-    int start();
+private:
+    vector<Hero*> heroes;
+    int energy;
 
-    private:
+public:
+    Team();
 
+    void addHero(Hero* hero);
+
+    vector<Hero*>& getHeroes();
+
+    int getEnergy() const;
+
+    void setEnergy(int energyAmount);
+
+    void decreaseEnergy(int amount);
+
+    bool hasAliveHero() const;
+
+    int aliveCount() const;
+
+    Hero* getWeakestHero();
+
+    Hero* getStrongestHero();
+
+
+    Hero* getRandomAliveHero();
+
+    
+    ~Team();
 };
 
 #endif
-
-
-
-

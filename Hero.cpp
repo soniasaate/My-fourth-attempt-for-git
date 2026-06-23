@@ -1,66 +1,81 @@
-#include "hero.h"
+#include "Hero.h"
+#include <algorithm>
 
-hero::hero()
+Hero::Hero(const string& heroName, int heroMaxHp, int cooldown): name(heroName),  hp(heroMaxHp),  maxHp(heroMaxHp),  specialCooldown(cooldown),  turnsSinceSpecial(0),  alive(true)
 {
-    name = "";
-    hp = 100;
-    maxHp = 100;
-    specialCooldown = 3;      
-    turnsSinceSpecial = 0;
-    alive = true;
 }
 
-void hero::takeDamage(int damage) 
+void Hero::takeDamage(int damage)
 {
-    if (!alive) 
-    return;  
-    
+    if (!alive || damage <= 0)
+        return;
+
     hp -= damage;
-    if (hp < 0) 
+
+    if (hp <= 0)
     {
         hp = 0;
         alive = false;
     }
 }
 
-void hero::heal(int amount) 
+void Hero::heal(int amount)
 {
-    if (!alive) 
-    return; 
-    
+    if (!alive || amount <= 0)
+        return;
+
     hp += amount;
-    if (hp > maxHp) 
-    {
-        hp = maxHp;  
-    }
+
+    if (hp > maxHp)
+        hp = maxHp;
 }
 
-bool hero::isAlive() const
+bool Hero::isAlive() const
 {
     return alive;
 }
 
-
-int hero::getHP() const
+int Hero::getHP() const
 {
     return hp;
 }
 
-bool hero::canUseSpecial() 
+int Hero::getMaxHP() const
 {
-    return (turnsSinceSpecial >= specialCooldown);
+    return maxHp;
 }
 
-void hero::increaseturnsp() 
+string Hero::getName() const
 {
-    turnsSinceSpecial++;
+    return name;
 }
 
-void hero::resetturnspr()
+bool Hero::canUseSpecial() const
 {
-    turnsSinceSpecial=0;
+    return turnsSinceSpecial >= specialCooldown;
 }
 
-hero::~hero()
+void Hero::increaseTurnsSinceSpecial()
+{
+    if (!canUseSpecial())
+        turnsSinceSpecial++;
+}
+
+void Hero::resetTurnsSinceSpecial()
+{
+    turnsSinceSpecial = 0;
+}
+
+int Hero::getTurnsSinceSpecial() const
+{
+    return turnsSinceSpecial;
+}
+
+int Hero::getSpecialCooldown() const
+{
+    return specialCooldown;
+}
+
+Hero::~Hero()
 {
 }
