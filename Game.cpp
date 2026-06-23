@@ -73,14 +73,10 @@ void Game::playGame()
         }
 
 
-        // به همه ی قهرمان های هردو تیم به قدرت ویژه اش یک راند اضافه میکنیم
-        for (Hero* hero : player1.getHeroes())
-            if (hero->isAlive())
-                hero->increaseTurnsSinceSpecial();
-
-        for (Hero* hero : player2.getHeroes())
-            if (hero->isAlive())
-                hero->increaseTurnsSinceSpecial();
+        //به شمارنده ی قدرت ویژه یکی اضافه میکنم
+        player1.increaseSpecialTurns();
+        player2.increaseSpecialTurns();
+    
 
         checkWinner();
 

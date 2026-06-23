@@ -2,7 +2,9 @@
 #include <algorithm>
 #include <iostream>
 
-Hero::Hero(const string& heroName, int heroMaxHp, int cooldown): name(heroName),  hp(heroMaxHp),  maxHp(heroMaxHp),  specialCooldown(cooldown),  turnsSinceSpecial(0),  alive(true)
+//Hero::Hero(const string& heroName, int heroMaxHp, int cooldown): name(heroName),  hp(heroMaxHp),  maxHp(heroMaxHp),  specialCooldown(cooldown),  turnsSinceSpecial(0),  alive(true)
+
+Hero::Hero(const string &heroName, int heroMaxHp): name(heroName), hp(heroMaxHp), maxHp(heroMaxHp), alive(true)
 {
 }
 
@@ -55,7 +57,7 @@ string Hero::getName() const
     return name;
 }
 
-bool Hero::canUseSpecial() const
+/*bool Hero::canUseSpecial() const
 {
     return turnsSinceSpecial >= specialCooldown;
 }
@@ -79,7 +81,7 @@ int Hero::getTurnsSinceSpecial() const
 int Hero::getSpecialCooldown() const
 {
     return specialCooldown;
-}
+}*/
 
 void Hero::revive(int amount)
 {

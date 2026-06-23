@@ -11,6 +11,7 @@ class Team
 private:
     vector<Hero*> heroes;
     int energy;
+    int specialTurnsPassed;
 
 public:
     Team();
@@ -37,6 +38,14 @@ public:
     Hero* getRandomAliveHero();
     Hero* chooseAliveHero();
     Hero* chooseDeadHeroExcept(Hero* excludedHero);
+
+    void increaseSpecialTurns();
+
+    void resetSpecialTurns();
+
+    int getSpecialTurnsPassed() const;
+
+    bool canUseSpecial(int neededRounds) const;
 
     
     ~Team();

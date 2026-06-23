@@ -4,7 +4,7 @@
 #include <climits> 
 #include <cstdlib>
 #include <iostream>
-Team::Team() : energy(0) 
+Team::Team() : energy(0) , specialTurnsPassed(0)
 {
 }
 
@@ -163,6 +163,26 @@ Hero* Team::chooseDeadHeroExcept(Hero* excludedHero)
 
         cout << "Invalid choice. Try again.\n";
     }
+}
+
+void Team::increaseSpecialTurns()
+{
+    specialTurnsPassed++;
+}
+
+void Team::resetSpecialTurns()
+{
+    specialTurnsPassed = 0;
+}
+
+int Team::getSpecialTurnsPassed() const
+{
+    return specialTurnsPassed;
+}
+
+bool Team::canUseSpecial(int neededRounds) const
+{
+    return specialTurnsPassed >= neededRounds;
 }
 
 

@@ -13,13 +13,13 @@ protected:
     int hp;
     int maxHp;
 
-    int specialCooldown;
-    int turnsSinceSpecial;
+    //int specialCooldown;
+    //int turnsSinceSpecial;
 
     bool alive;
 
 public:
-    Hero(const string& heroName, int heroMaxHp, int cooldown);
+    Hero(const string& heroName, int heroMaxHp);
 
     virtual void skill1(Team& myTeam, Team& enemyTeam) = 0;
     virtual void skill2(Team& myTeam, Team& enemyTeam) = 0;
@@ -37,13 +37,13 @@ public:
 
     string getName() const;
 
-    bool canUseSpecial() const;
+    //bool canUseSpecial() const;
 
-    void increaseTurnsSinceSpecial();
-    void resetTurnsSinceSpecial();
+    //void increaseTurnsSinceSpecial();
+    //void resetTurnsSinceSpecial();
 
-    int getTurnsSinceSpecial() const;
-    int getSpecialCooldown() const;
+    //int getTurnsSinceSpecial() const;
+    //int getSpecialCooldown() const;
     void revive(int amount);
 
     virtual ~Hero();

@@ -4,8 +4,7 @@
 
 using namespace std;
 
-DoctorWhite::DoctorWhite()
-    : Hero("Doctor White", 550, 4)
+DoctorWhite::DoctorWhite(): Hero("Doctor White", 550)
 {
 }
 
@@ -51,7 +50,7 @@ void DoctorWhite::skill2(Team& myTeam, Team& enemyTeam)
 void DoctorWhite::specialSkill(Team& myTeam, Team& enemyTeam)
 {
     //تمام اثرات منفی رو پاک نکردم هنوز
-    if (!canUseSpecial())
+    if (!myTeam.canUseSpecial(4))
     {
         cout << "Doctor White's special skill is not ready.\n";
         return;
@@ -70,5 +69,5 @@ void DoctorWhite::specialSkill(Team& myTeam, Team& enemyTeam)
 
     cout << deadHero->getName()<< " was revived with 200 HP.\n";
 
-    resetTurnsSinceSpecial();
+    myTeam.resetSpecialTurns();
 }
