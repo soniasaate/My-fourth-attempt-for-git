@@ -73,6 +73,7 @@ void TahaKoochike::skill2(Team& myTeam, Team& enemyTeam)
 
 void TahaKoochike::specialSkill(Team& myTeam, Team& enemyTeam)
 {
+    
     if (myTeam.getEnergy() < 4)
     {
         cout << "Not enough energy!\n";

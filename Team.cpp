@@ -209,6 +209,71 @@ Hero* Team::getRandomAliveHeroExcept(Hero* excludedHero)
 }
 
 
+Hero* Team::getRandomAliveHerowithouthidden()
+{
+    vector<Hero*> availableHeroes;
+
+    for (Hero* hero : heroes)
+    {
+        if (hero->canBeTargetedBySingleAttack())
+        {
+            availableHeroes.push_back(hero);
+        }
+    }
+
+    if (availableHeroes.empty())
+        return nullptr;
+
+    int randomIndex = rand() % availableHeroes.size();
+
+    return availableHeroes[randomIndex];
+}
+
+Hero* Team::chooseAliveHerowithouthidden()
+{
+    vector<Hero*> availableHeroes;
+
+    for (Hero* hero : heroes)
+    {
+        if (hero->canBeTargetedBySingleAttack())
+        {
+            availableHeroes.push_back(hero);
+        }
+    }
+
+    if (availableHeroes.empty())
+    {
+        cout << "No target is available.\n";
+        return nullptr;
+    }
+
+    cout << "\nChoose a hero:\n";
+
+    for (int i = 0; i < availableHeroes.size(); i++)
+    {
+        cout << i + 1 << ". "
+             << availableHeroes[i]->getName()
+             << " [" << availableHeroes[i]->getRole() << "]"
+             << " | HP: " << availableHeroes[i]->getHP()
+             << '\n';
+    }
+
+    int choice;
+
+    while (true)
+    {
+        cout << "Choice: ";
+        cin >> choice;
+
+        if (choice >= 1 && choice <= static_cast<int>(availableHeroes.size()))
+        {
+            return availableHeroes[choice - 1];
+        }
+
+        cout << "Invalid choice. Try again.\n";
+    }
+}
+
 Team::~Team()
 {
     for (Hero* hero : heroes)

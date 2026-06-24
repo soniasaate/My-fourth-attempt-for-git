@@ -59,7 +59,7 @@ void DeniGolang::skill2(Team& myTeam, Team& enemyTeam)
     target->takeDamage(damage);
     Hero* maxhp = enemyTeam.getStrongestHero();
     maxhp->takeDamage(damage);
-
+    cout<< "hits Maxhp enemy 50hp and hits"<< target->getName()<<"50hp\n";
     cout << "Elephant killer  skill used\n";
 }
 

@@ -43,7 +43,7 @@ void TahaBozorge::skill2(Team &myTeam, Team &enemyTeam)
     }
     myTeam.decreaseEnergy(4);  
     
-    Hero* target = enemyTeam.getRandomAliveHero();
+    Hero* target = enemyTeam.getRandomAliveHerowithouthidden();
 
     if (!target) return;
     int damage= 90;
@@ -60,6 +60,8 @@ void TahaBozorge::skill2(Team &myTeam, Team &enemyTeam)
 
 void TahaBozorge::specialSkill(Team& myTeam, Team& enemyTeam)
 {
+    //قابلیت دوپینگ رو اعمال نکردم چون تقریبا بدون منطق میشد این قسمت 
+
     if (myTeam.getEnergy() < 3)
     {
         cout << "Not enough energy!\n";

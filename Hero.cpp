@@ -237,7 +237,10 @@ void Hero::processEndOfRoundEffects()
     }
 }
 
-
+bool Hero::canBeTargetedBySingleAttack() const
+{
+    return alive && !hidden;
+}
 Hero::~Hero()
 {
 }

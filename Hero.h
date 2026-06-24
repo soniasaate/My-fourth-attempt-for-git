@@ -76,6 +76,8 @@ public:
     void clearNegativeEffects();
 
     void processEndOfRoundEffects();
+
+    bool canBeTargetedBySingleAttack() const;
     virtual ~Hero();
 
 };
